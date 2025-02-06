@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://d8udlmrbp08l"]
+
+[ext_resource type="Material" uid="uid://1qrx3tnk641h" path="res://Walls.tres" id="1_bgtn3"]
+[ext_resource type="Script" path="res://state_machine.gd" id="2_8kyvp"]
+[ext_resource type="Script" path="res://idle.gd" id="3_gqim5"]
+[ext_resource type="Script" path="res://run.gd" id="4_w6i4q"]
+
+[sub_resource type="Environment" id="Environment_wigns"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sekqs"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nv366"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_s31is"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 0.456104, 0.889926, 0, -0.889926, 0.456104, 0, 9.2153, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_wigns")
+
+[node name="Map" type="Node" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map"]
+transform = Transform3D(77.4395, 0, 0, 0, 1, 0, 0, 0, 84.2928, 0, 0, 0)
+material_override = ExtResource("1_bgtn3")
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map"]
+transform = Transform3D(98.2126, 0, 0, 0, 3.34547, 0, 0, 0, 1, 8.86666, 0, 41.8657)
+material_override = SubResource("StandardMaterial3D_sekqs")
+use_collision = true
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map"]
+transform = Transform3D(-0.0394246, 0, 1, 0, 3.34547, 0, -98.2126, 0, -0.000401421, -39.0317, 0, -5.94224)
+material_override = SubResource("StandardMaterial3D_sekqs")
+use_collision = true
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(-0.99953, 0, -0.0306431, 0, 1, 0, 0.0306431, 0, -0.99953, 0, 2.44969, 0)
+
+[node name="StateMachine" type="Node" parent="CharacterBody3D"]
+script = ExtResource("2_8kyvp")
+
+[node name="Idle" type="Node" parent="CharacterBody3D/StateMachine"]
+script = ExtResource("3_gqim5")
+
+[node name="Run" type="Node" parent="CharacterBody3D/StateMachine"]
+script = ExtResource("4_w6i4q")
+
+[node name="Head" type="Node3D" parent="CharacterBody3D"]
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109255, 0.622097, -0.079981)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_nv366")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_s31is")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="State" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="UI/State"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

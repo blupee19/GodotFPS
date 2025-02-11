@@ -15,11 +15,6 @@ run/main_scene="res://newTester.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-baseState="*res://baseState.gd"
-stateMachine="*res://stateMachine.gd"
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")

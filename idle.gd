@@ -17,5 +17,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		exit("Dash")
 
 func _physics_process(delta: float) -> void:
+	fsm.character.velocity.x = 0
+	fsm.character.velocity.z = 0
 	fsm.character.velocity.y -= 9.8 * delta
 	fsm.character.move_and_slide()

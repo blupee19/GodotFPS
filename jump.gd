@@ -6,7 +6,7 @@ var fsm: StateMachine
 func enter():
 	fsm.stateLabel.text = "JUMP"
 	if Input.is_action_just_pressed("Jump"):
-		fsm.character.velocity.y = 20
+		fsm.character.velocity.y = 10
 
 
 func exit(state_name):

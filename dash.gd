@@ -18,3 +18,4 @@ func _physics_process(delta: float) -> void:
 	fsm.character.move_and_slide()
 	await get_tree().create_timer(0.2).timeout
 	exit("Idle")
+	
